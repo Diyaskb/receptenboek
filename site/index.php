@@ -22,7 +22,6 @@ require 'database.php';
 
 
     <main class="container py-3">
-        <!-- <h2 class="text-center pb-3">Featured Recipes</h2> -->
         <div class="row">
             <div class="col-md-5">
                 <img src="./images_site/china-town.jpg" alt="" class="w-200" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem; height: 250px;">

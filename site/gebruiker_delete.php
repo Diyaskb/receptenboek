@@ -7,9 +7,9 @@ $id = $_GET['id'];
 
 
 $stmt = $conn->prepare("DELETE FROM `recipes` WHERE user_id = $id");
-echo "DELETE FROM `recipes` WHERE user_id = $id";
+// echo "DELETE FROM `recipes` WHERE user_id = $id";
 // $stmt->bindParam(':id', $id);
-$stmt->execute();
+////$stmt->execute();
 //$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 //var_dump($stmt->fetchAll());
 

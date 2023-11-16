@@ -4,8 +4,6 @@
 require "database.php";
 
 
-// var_dump($_POST);
-
 // Gegevens van het formulier ophalen
 
 if (isset($_POST['submit'])) {
@@ -25,13 +23,15 @@ if (isset($_POST['submit'])) {
     $stmt->bindParam(':role_id', $role);
 
     $stmt->execute();
+
     header('location: login.php');
+    // beheerder maakt gebruiker
     if ($_SESSION["gebruikerData"]['role_id'] == 2) {
         header("Location: beheer_gebruikers.php");
     }
 }
 
-// $_SESSION["gebruikerData"] = $user;
+
 
 // dropdown
 $stmt = $conn->prepare("SELECT * FROM `roles`");
@@ -104,7 +104,7 @@ $allRoles = $stmt->fetchAll();
                                 </div>
 
                                 <div class="mb-4">
-
+                                    <!-- dropdown -->
                                     <select name="role" id="">
                                         <?php foreach ($allRoles as $role) { ?>
                                             <option value=<?php echo $role["id"] ?>><?php echo $role["name"] ?></option>

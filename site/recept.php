@@ -3,9 +3,7 @@
 
 require "database.php";
 
-// echo "===================== VAR DUMP ===============================<BR>";
-// var_dump($_POST);
-// echo "===================== VAR DUMP ===============================<BR>";
+
 
 
 
@@ -22,9 +20,6 @@ if (isset($_GET['recipeID'])) {
     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
     $all_recipes = $stmt->fetch();
 
-    // echo "===================== VAR DUMP ===============================<BR>";
-    // var_dump($all_recipes);
-    // echo "===================== VAR DUMP ===============================<BR>";
 
     $stmtING = $conn->prepare("SELECT * FROM `recipes_ingredients` JOIN ingredients ON ingredients.id = ingredients_id WHERE  recipes_id = $recipeID");
     $stmtING->execute();
@@ -62,7 +57,6 @@ if (isset($_GET['recipeID'])) {
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-lg-8 col-xl-6">
                     <div class="card rounded-3">
-                        <!-- IMAGE WERKEND MAKEN -->
                         <IMG src="./images_site/lampionnen.png" class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem; height: 225px;" alt="Sample photo"></IMG>
                         <div class="card-body p-4 p-md-5">
                             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Recept</h3>
@@ -126,12 +120,6 @@ if (isset($_GET['recipeID'])) {
 
                             </div>
                             <a class="btn btn-success btn-lg mb-1" href="recept_edit.php?recipeID=<?php echo $recipeID ?>">Bewerken</a>
-                            <!-- <inpaut class="btn btn-success btn-lg mb-1" type="submit" value="Save" name="submit"> -->
-
-
-
-
-
                         </div>
                     </div>
                 </div>

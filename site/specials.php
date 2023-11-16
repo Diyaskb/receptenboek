@@ -19,7 +19,6 @@ $allDifficulty = $stmt->fetchAll();
 
 
 // welke recept het meeste ingredienten heeft
-
 $stmt = $conn->prepare("SELECT  recipes.id, recipes.title, recipes.picture, recipes_id, COUNT(recipes_id) AS MOST FROM `recipes_ingredients` JOIN recipes ON recipes.id = recipes_id
 GROUP BY recipes_id ORDER BY MOST DESC limit 1");
 $stmt->execute();
@@ -71,7 +70,6 @@ $allMost = $stmt->fetchAll();
             <h5>Recept met de meeste ingrediënten</h5>
                 <?php foreach ($allMost as $most) { ?>
                     <div class="col-sm-6">
-                        <!-- <p>gerecht die het makkelijkst is </p> -->
                         <img src="./images/<?php echo $most['picture']; ?>" width="400px" height="300px">
                         <br>
                         <a class="btn btn-outline-light btn-lg mb-1" style="background-color:#9a8c98;" href="recept.php?recipeID=<?php echo $most['id'] ?>"><?php echo $most["title"] ?></a>

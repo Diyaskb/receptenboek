@@ -24,7 +24,6 @@ if (isset($_POST['submit'])) {
     $stmt->bindParam(':role_id', $role);
 
     $stmt->execute();
-
 }
 
 if (isset($_GET['id'])) {
@@ -64,42 +63,11 @@ $allRoles = $stmt->fetchAll();
 </head>
 
 <body>
-    <!-- <h2>Gebruiker registreren</h2>
-    <form method="post" action="">
-        <label for="title">voornaam:</label>
-        <input type="text" name="title" id="title" required><br><br>
-
-        <label for="picture">achternaam:</label>
-        <input type="text" name="picture" id="picture" required><br><br>
-
-        <label for="duration">E-mailadres:</label>
-        <input type="duration" name="duration" id="duration" required><br><br>
-
-        <label for="dish">Wachtwoord:</label>
-        <input type="dish" name="dish" id="dish" required><br><br>
-
-        <label for="difficulty">Rol:</label>
-        <select name="difficulty" id="">
-       
-        </select>
-
-        <br>
-        <br>
-
-        <input type="submit" value="Registreren" name="submit">
-    </form>
-
-    <p>al een account? <a href="login.php">log hier in!</a></p>
-</body> -->
-
-    <!-- --------------------------------------------------------------- -->
-    <!-- ---------------------------------------------------------------------------------------- -->
     <section class="h-100 h-custom" style="background-color: #8fc4b7;">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-lg-8 col-xl-6">
                     <div class="card rounded-3">
-                        <!-- IMAGE WERKEND MAKEN -->
                         <IMG src="./images_site/lampionnen.png" class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem; height: 225px;" alt="Sample photo"></IMG>
                         <div class="card-body p-4 p-md-5">
                             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2"> Update gebruiker</h3>

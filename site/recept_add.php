@@ -8,15 +8,15 @@ $saved = "";
 $user_id = "";
 
 if (isset($_SESSION['gebruikerData'])) {
-    // $user_id = $_SESSION['gebruikerData'];
+    // user id ophalen van de logged in user
     $user_id = $_SESSION['gebruikerData']['id'];
 
-
-    if ($_SESSION['gebruikerData']['role_id'] == '2') {
-        // echo "<script>alert('Welkom op recepten update!');</script>";
-    } else {
-        // echo "<script>alert('U bent niet admin!'); window.location.href = 'index.php';</script>";
-    }
+    // // check of de admin is ingelogd
+    // if ($_SESSION['gebruikerData']['role_id'] == '2') {
+    //     // echo "<script>alert('Welkom op recepten update!');</script>";
+    // } else {
+    //     // echo "<script>alert('U bent niet admin!'); window.location.href = 'index.php';</script>";
+    // }
 } else {
     echo "<script>alert('U bent niet ingelogd!'); window.location.href = 'index.php';</script>";
 }
@@ -49,55 +49,41 @@ if (isset($_POST['submit'])) {
     $stmt->execute();
 
     //================
-    // use exec() because no results are returned
-    // $conn->exec($stmt);
+    // haal de laatste recept ID om de ingredenten in aparte tabel in desbetreffende secept ID op te slaan
     $last_id = $conn->lastInsertId();
-    echo "New record created successfully. Last inserted ID is: " . $last_id;
     //==============
     $saved = 'Opgeslagen! <BR>' . '<a class="btn btn-success btn-lg mb-1" href="recepten.php">Terug naar recepten</a>';
 
 
-    // =====save ingredients========
-    // id	recipes_id	ingredients_id	amount	
+    // ===== sla ingredienten op == START========
     $prepareSQL2 = "";
     $prepareSQL3 = "";
     $IDfound = "";
 
-
+    // loop door alle post variables waar de `key` is de naam van de variable en `val` is de waarde van de variable
     foreach ($_POST as $key => $val) {
-        echo "$key = $val<br>";
+        // deels aanmaken van de SQL statement
         $prepareSQL = 'INSERT INTO recipes_ingredients (recipes_id, ingredients_id, amount) VALUES (' . $last_id;
+
+        // zoeken naar variable die begint met ingID om ingredient ID vast te stellen
         if (substr("$key", 0, 5) == "ingID") {
             $prepareSQL2 = "," . $val;
+            // checken of ingID is gevonden
             $IDfound = "Yes";
-
-
-
-            echo "<br>$key = $val<br>";
         }
+        // zoeken naar variable die begint met ingAmnt om de amount vast te stellen
         if (substr("$key", 0, 7) == "ingAmnt" && $IDfound == "Yes") {
             $prepareSQL3 = ",'" . $val . "'";
+            // reset IDfound zodat ie klaar is om volgende zetje van ID en Amount te zoeken 
             $IDfound = "";
-
+            // zet alle stukken van SQL statement in elkaar
             $prepareSQL = $prepareSQL . $prepareSQL2 . $prepareSQL3 . ')';
-            // echo "<br>$prepareSQL<br>";
-            // $stmtING = $conn->prepare("INSERT INTO recipes_ingredients (recipes_id, ingredients_id, amount) VALUES (70,2,10)");
             $stmtING = $conn->prepare($prepareSQL);
-
             $stmtING->execute();
-
-            echo "<br>$key = $val<br>";
         }
-
-        //echo "===========================<br>";
-
         //echo "'$key' = '$val'<br>";
     }
-
-
-
-
-    //  ===========================
+    //  ===========sla ingredienten op == END================
 }
 
 
@@ -139,40 +125,48 @@ $allIngredients = $stmt->fetchAll();
 
 
         function addIngredient() {
+            // haal de div op waar de ingredienten in komen te staan
             var container = document.getElementById("divIngredients");
 
+            // creëer input elemanten in de DIV divIngredients
             var inputIngID = document.createElement("input");
             var input = document.createElement("input");
             var inputAmnt = document.createElement("input");
 
+            // geef de type van de input aan
             inputIngID.type = "hidden";
             input.type = "text";
             inputAmnt.type = "text";
 
+            // voeg de ingredient ID toe aan de id van de element om uniek ID te creëren 
             inputIngID.id = "ingID" + document.getElementById("ingredients").value;
             input.id = "ingName" + document.getElementById("ingredients").value;
             inputAmnt.id = "ingAmnt" + document.getElementById("ingredients").value;
 
+            // geef naam aan de input element (zelfde als de ID 
             inputIngID.name = inputIngID.id;
             input.name = input.id;
             inputAmnt.name = inputAmnt.id;
 
-            // to get the value of `input.value`
+            // om de tekst van de dropdown lijst te krijgen om het vervolgens te gebruiken als waarde van input.value
             // input.value = document.getElementById('ingredients').text;
             var dropdownList = document.getElementById('ingredients');
             var selecetedIndex = dropdownList.selectedIndex;
             var selectedOption = dropdownList.options[selecetedIndex];
 
-            inputIngID.value = document.getElementById("ingredients").value;;
+            inputIngID.value = document.getElementById("ingredients").value;
             input.value = selectedOption.text;
-            inputAmnt.value = document.getElementById("ingAmount").value;;
+            inputAmnt.value = document.getElementById("ingAmount").value;
 
+            // deze twee elementen niet bewerkbaar maken
             input.readOnly = true;
             inputAmnt.readOnly = true;
 
+            // voeg de gemaakte elementen toe aan de DIV divIngredients
             container.appendChild(inputIngID);
             container.appendChild(input);
             container.appendChild(inputAmnt);
+
             container.appendChild(document.createElement("br"));
 
         }

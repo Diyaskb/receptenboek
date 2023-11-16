@@ -2,19 +2,6 @@
 
 require 'database.php';
 
-// $servername = "mariadb";
-// $username = "username";
-// $password = "password";
-// $dbname = "myDBPDO";
-
-
-// $stmt = $conn->prepare("SELECT id, first_name, last_name FROM users");
-// $stmt->execute();
-
-// // set the resulting array to associative
-// $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-// $myGuests = $stmt->fetchAll();
-
 
 $stmt = $conn->prepare("SELECT id, title, picture FROM recipes");
 $stmt->execute();

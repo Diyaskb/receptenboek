@@ -4,20 +4,17 @@ require 'database.php';
 
 $id = $_GET['id'];
 
-// =====================================
+// ingrediënten van het recept verwijderen
 $stmt = $conn->prepare("DELETE FROM `recipes_ingredients` WHERE recipes_id = $id");
 $stmt->execute();
 
-// =====================================
 
-
+// recept verwijderen
 $stmt = $conn->prepare("DELETE FROM recipes WHERE id = :id");
 $stmt->bindParam(':id', $id);
 $stmt->execute();
 
-// set the resulting array to associative
-// $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-// $user = $stmt->fetch();
+
 
 
 ?>
@@ -36,7 +33,6 @@ $stmt->execute();
 
 <body>
     <h1>Verwijderd!</h1>
-
 
     <a type="button" class="btn btn-outline-secondary" href="beheer_recepten.php">Terug naar recepten</a>
 

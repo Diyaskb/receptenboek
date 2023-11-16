@@ -3,8 +3,7 @@
 require 'database.php';
 
 
-$stmt = $conn->prepare("SELECT Count(title)
-from recipes;");
+$stmt = $conn->prepare("SELECT Count(title) from recipes;");
 $stmt->execute();
 
 // set the resulting array to associative
@@ -32,7 +31,7 @@ $totalRecipes = $aantalRecipes[0]["Count(title)"];
     <div class="container-fluid p-5  text-white text-center" style="background-color:#80b0a4; ">
         <h1>Smaakvol China</h1>
         <h4>Een verzameling van heerlijke recepten</h4>
-        <h5><?php echo $totalRecipes . "    recepten"; ?></h5>
+        <h5><?php echo $totalRecipes . " recepten"; ?></h5>
     </div>
 
 

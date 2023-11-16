@@ -1,18 +1,6 @@
 <?php
 require 'database.php';
 
-// $servername = "mariadb";
-// $username = "username";
-// $password = "password";
-// $dbname = "myDBPDO";
-
-
-// $stmt = $conn->prepare("SELECT id, first_name, last_name FROM users");
-// $stmt->execute();
-
-// // set the resulting array to associative
-// $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-// $myGuests = $stmt->fetchAll();
 
 
 $stmt = $conn->prepare("SELECT * FROM ingredients");
@@ -45,7 +33,6 @@ $all_ingredients = $stmt->fetchAll();
             <a type="button" class="btn btn-outline-secondary btn-sm" href="ingredient_add.php">Nieuwe ingredient</a>
         </div>
 
-        <!-- <h1>Ingrediënten</h1> -->
         <table class="table table-sm text-center">
             <thead>
                 <tr style="color: #000;">

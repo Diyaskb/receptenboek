@@ -1,17 +1,14 @@
 <?php
 $invalid = "";
 
-
 if (isset($_POST['email']) && !empty($_POST['email'])) {
 
     $email = $_POST['email'];
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        // echo "Invalid email format";
-        //exit;
-        $test = "";
-        $test = "Invalid email format";
-    }
+    // if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    //     $test = "";
+    //     $test = "Invalid email format";
+    // }
 
     require 'database.php';
 
@@ -21,7 +18,7 @@ if (isset($_POST['email']) && !empty($_POST['email'])) {
 
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if (is_array($user) && count($user) > 0) { ///yeah user is found
+    if (is_array($user) && count($user) > 0) { // user is found
         //test wachtwoord
         if (isset($_POST['password']) && !empty($_POST['password'])) {
             $password = $_POST['password']; //ingevulde wachtwoord
@@ -78,19 +75,12 @@ if (isset($_POST['email']) && !empty($_POST['email'])) {
     </form>
     <p>Nog geen account? <a href="registreer.php">Maak hier je account!</a><? // $test 
                                                                             ?></p> -->
-
-
-
-
-
-    <!-- --------------------------------------------------------------- -->
     <!-- ---------------------------------------------------------------------------------------- -->
     <section class="h-100 h-custom" style="background-color: #8fc4b7;">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-lg-8 col-xl-6">
                     <div class="card rounded-3">
-                        <!-- IMAGE WERKEND MAKEN -->
                         <IMG src="./images_site/lampionnen.png" class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem; height: 225px;" alt="Sample photo"></IMG>
                         <div class="card-body p-4 p-md-5">
                             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Log in</h3>
